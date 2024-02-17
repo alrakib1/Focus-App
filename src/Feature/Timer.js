@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Platform, Vibration } from "react-native";
 import React, { useState } from "react";
+import { useKeepAwake } from "expo-keep-awake";
 
 import { Countdown } from "../components/CountDown";
 import { RoundedButton } from "../components/RoundedButton";
@@ -8,10 +9,11 @@ import { colors } from "../utils/colors";
 import { ProgressBar } from "react-native-paper";
 import Timing from "./Timing";
 
-export default function Timer({ focusSubject,clearSubject }) {
+export default function Timer({ focusSubject, clearSubject, onTimerEnd }) {
+  useKeepAwake();
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
-  const [minutes, setminutes] = useState(20);
+  const [minutes, setminutes] = useState(30);
 
   const ONE_SECOND_IN_MS = 1000;
 
@@ -23,6 +25,14 @@ export default function Timer({ focusSubject,clearSubject }) {
     1 * ONE_SECOND_IN_MS,
   ];
 
+  const onEnd = (reset) => {
+    Vibration.vibrate(PATTERN);
+    setIsStarted(false);
+    setProgress(1);
+    reset();
+    onTimerEnd(focusSubject);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.countdown}>
@@ -30,9 +40,7 @@ export default function Timer({ focusSubject,clearSubject }) {
           minutes={minutes}
           isPaused={!isStarted}
           onProgress={setProgress}
-          onEnd={() => {
-            Vibration.vibrate(PATTERN);
-          }}
+          onEnd={onEnd}
         />
 
         <View style={{ paddingTop: spacing.xxl }}>

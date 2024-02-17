@@ -8,7 +8,7 @@ import { spacing, fontSizes } from "../utils/sizes";
 import { RoundedButton } from "../components/RoundedButton";
 
 export default function Focus({ addSubject }) {
-  
+
   const [subject, setSubject] = useState(null);
 
   return (
@@ -33,7 +33,6 @@ export default function Focus({ addSubject }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
   },
   button: {
     justifyContent: "center",
