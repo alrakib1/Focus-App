@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Focus-app",
+    "slug": "Focus-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
