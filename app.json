@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Focus-app",
+    "sdkVersion": "50.0.0",
     "slug": "Focus-app",
     "version": "1.0.0",
     "assetBundlePatterns": [
